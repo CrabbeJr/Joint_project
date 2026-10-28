@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    Rigidbody2D rb;
+    public Transform transformPlayer;
+    public float moveSpeed = 0.01f;
     void Start()
     {
         
@@ -12,9 +13,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (true)
-        { 
-        
-        }
+       
+    }
+
+    private void FixedUpdate()
+    {
+       // float moveSpeedReal = moveSpeed * Time.deltaTime;
+        transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed, 0);
     }
 }
