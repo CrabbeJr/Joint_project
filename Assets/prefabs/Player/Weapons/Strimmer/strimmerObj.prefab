@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4524403210393280351}
   - component: {fileID: 9063900792380244348}
-  - component: {fileID: 6527875964349497330}
-  - component: {fileID: -7850048139120791431}
+  - component: {fileID: 2406697607824767663}
   m_Layer: 0
   m_Name: strimmerObj
   m_TagString: Untagged
@@ -81,9 +80,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +93,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!114 &6527875964349497330
+--- !u!114 &2406697607824767663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,21 +104,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cfb6a6611c165a409763f4a1c7c8e82, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::strimmer.StrimmerAttack
-  playerTransform: {fileID: 0}
-  playerObj: {fileID: 7471820875860802917, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
---- !u!114 &-7850048139120791431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7189959878058155716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99da001c7f67e4a4986984947758aebb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  strimmerTransform: {fileID: 0}
-  strimmerAttack: {fileID: 7189959878058155716, guid: dd9d49daa356251469f9fa05d0b5569b, type: 3}
-  cooldown: 0.5
+  m_EditorClassIdentifier: Assembly-CSharp::strimmer.follow.StrimmerFollow
+  maxTimeAlive: -1
