@@ -26,8 +26,13 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+       // player movement
        // float moveSpeedReal = moveSpeed * Time.deltaTime;
         transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed, 0);
+        
+        
+        //weapon management
         for (int i = 0; i < weaponsOwned.GetLength(0); i++)
         {
             if (weaponsOwned[i] && !weaponsStarted[i])
@@ -38,7 +43,10 @@ public class PlayerScript : MonoBehaviour
                         attackManager.StartCoroutine("StartStrimmer");
                         weaponsStarted[i] = true;
                     break;
+                    
                     case 1:
+                        attackManager.StartCoroutine("startShears");
+                        weaponsStarted[i] = true;
                     break;
                 }
             }
