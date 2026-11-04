@@ -15,7 +15,7 @@ public class AttackManager : MonoBehaviour
 
     private void StartStrimmer()
     {
-        Instantiate(strimmerObject,transform.position,Quaternion.identity);
+        Instantiate(strimmerObject, transform.position, Quaternion.identity);
         InvokeRepeating(nameof(spawnAttackStrimmer), 0, strimmerCooldown);
     }
 
@@ -25,13 +25,13 @@ public class AttackManager : MonoBehaviour
     }
 
     //function to throw shear
-    void throwShear()
+    private void throwShear()
     {
         Instantiate(shearObject, transform.position, Quaternion.identity);
     }
 
     //function to throw shears repeatedly
-    void StartShears()
+    private void StartShears()
     {
         InvokeRepeating(nameof(throwShear), 0, shearCooldown);
     }

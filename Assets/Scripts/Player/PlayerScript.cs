@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
                     break;
                     
                     case 1:
-                        attackManager.StartCoroutine("startShears");
+                        attackManager.StartCoroutine("StartShears");
                         weaponsStarted[i] = true;
                     break;
                 }
