@@ -1,9 +1,12 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using static PlayerScript;
 
 public class ShearBehaviour : MonoBehaviour
 {
-
+    private GameObject playerObj;
+    private Rigidbody2D playerRb;
+    private PlayerScript.playerStats PlayerStats;
     private Rigidbody2D rb;
     private Vector2 aim, randAim; //aim is the direction the projectile should go in when thrown, randAim is used to work out which direction to go when no enemies are nearby
     private Vector2 backAim; //aim for going backwards
@@ -34,12 +37,15 @@ public class ShearBehaviour : MonoBehaviour
 
 private void Awake()
     {
-
-        rb = this.GetComponent<Rigidbody2D>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+        PlayerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().currentStats;
+        rb = GetComponent<Rigidbody2D>();
 
         if (GameObject.FindGameObjectsWithTag("Enemy") != null)
         {
-            Vector2 nearbyEnemy = GetClosestEnemy(GameObject.FindGameObjectsWithTag("Enemy")).position;
+            Debug.Log(GetClosestEnemy(GameObject.FindGameObjectsWithTag("Enemy")).position);
+            Vector2 nearbyEnemy = (GetClosestEnemy(GameObject.FindGameObjectsWithTag("Enemy")).position - playerObj.transform.position);
             aim = Vector2.Normalize(nearbyEnemy);
         }
         else
@@ -48,11 +54,11 @@ private void Awake()
             aim = Vector2.Normalize(randAim);
         }
         backAim = (-1) * aim;
-        rb.AddForce(aim * initialForce);
+        rb.AddForce((aim * initialForce * PlayerStats.weaponSpeed) + playerRb.linearVelocity);
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(backAim * backAcceleration);
+        rb.AddForce(backAim * backAcceleration * PlayerStats.weaponSpeed);
     }
 }

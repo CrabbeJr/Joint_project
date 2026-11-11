@@ -12,12 +12,12 @@ public class PlayerScript : MonoBehaviour
     {
         public float health = 50;
         public float moveSpeed = 0.05f;
-        public float weaponCooldownMultiplier = 1f;
-        public float weaponAreaMultiplier = 1f;
+        public float weaponCooldown = 1f;
+        public float weaponArea = 1f;
         public float moveSpeedMultiplier = 1f;
-        public float weaponSpeedMultiplier = 1f;
-        public float weaponDamageMultiplier = 1f;
-        public float weaponDurationMultiplier = 1f;
+        public float weaponSpeed = 1f;
+        public float weaponDamage = 1f;
+        public float weaponDuration = 1f;
         public float playerRegen = 0f;
         public float playerLuck = 0f;
         public float playerXpGain = 0f;
@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour
     public int playerCharacter = 0;
 
     public playerStats[] characterStats;
-    private playerStats currentStats;
+    public playerStats currentStats;
 
     public bool[] weaponsOwned = { false, false, false};
     private bool[] weaponsStarted = { false, false , false};
