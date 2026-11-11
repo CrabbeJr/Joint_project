@@ -7,11 +7,11 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed = 0.01f;
     public float health = 50;
 
-    public bool[] weaponsOwned = { false, false};
-    private bool[] weaponsStarted = { false, false };
+    public bool[] weaponsOwned = { false, false, false};
+    private bool[] weaponsStarted = { false, false , false};
 
     private AttackManager attackManager;
-    //                             strimmer
+
 
     void Start()
     {
@@ -45,7 +45,12 @@ public class PlayerScript : MonoBehaviour
                     break;
                     
                     case 1:
-                        attackManager.StartCoroutine("startShears");
+                        attackManager.StartCoroutine("StartShears");
+                        weaponsStarted[i] = true;
+                    break;
+
+                    case 2:
+                        attackManager.StartCoroutine("StartAxes");
                         weaponsStarted[i] = true;
                     break;
                 }

@@ -2154,9 +2154,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7192795631231094376, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
+      propertyPath: shearObject
+      value: 
+      objectReference: {fileID: 2650690724018684927, guid: 278c9c03099eeae4d9fbd35fa2840790, type: 3}
     - target: {fileID: 887472226475849844, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
       propertyPath: 'weaponsOwned.Array.data[0]'
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 887472226475849844, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
+      propertyPath: 'weaponsOwned.Array.data[1]'
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7332008180616627092, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2204,10 +2212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7332008180616627092, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1998701021}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
 --- !u!1 &1998701018
@@ -2222,6 +2227,7 @@ GameObject:
   - component: {fileID: 1998701020}
   - component: {fileID: 1998701019}
   - component: {fileID: 1998701022}
+  - component: {fileID: 1998701023}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2297,11 +2303,11 @@ Transform:
   m_GameObject: {fileID: 1998701018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.762, y: -1.042, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 309484916}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1998701022
 MonoBehaviour:
@@ -2347,10 +2353,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1998701023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998701018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf1c63ecd5cb7e4990b6cdb6cb79f12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cameraController.CameraController
+  playerTransform: {fileID: 309484916}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1105885902}
+  - {fileID: 1998701021}
   - {fileID: 791246824}
   - {fileID: 869015950}
