@@ -2164,7 +2164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887472226475849844, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
       propertyPath: 'weaponsOwned.Array.data[1]'
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7332008180616627092, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
       propertyPath: m_LocalPosition.x

@@ -111,7 +111,7 @@ MonoBehaviour:
   transformPlayer: {fileID: 7332008180616627092}
   moveSpeed: 0.05
   health: 50
-  weaponsOwned: 0000
+  weaponsOwned: 000001
 --- !u!114 &-7192795631231094376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +126,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackManager
   strimmerAttack: {fileID: 7189959878058155716, guid: dd9d49daa356251469f9fa05d0b5569b, type: 3}
   strimmerObject: {fileID: 7189959878058155716, guid: d9033f8bcafa9ca47bc9076d6246d769, type: 3}
+  shearObject: {fileID: 2650690724018684927, guid: 278c9c03099eeae4d9fbd35fa2840790, type: 3}
+  axeObject: {fileID: 869635819019097193, guid: 185254aeaca8b5b45bfab69153b8358e, type: 3}
   strimmerCooldown: 0.5
+  shearCooldown: 1
 --- !u!50 &3502973239598724332
 Rigidbody2D:
   serializedVersion: 5
