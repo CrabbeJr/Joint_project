@@ -31,10 +31,11 @@ public class PlayerScript : MonoBehaviour
     public playerStats[] characterStats;
     private playerStats currentStats;
 
-    private bool[] weaponsStarted = { false, false };
+    public bool[] weaponsOwned = { false, false, false};
+    private bool[] weaponsStarted = { false, false , false};
 
     private AttackManager attackManager;
-    //                             strimmer
+
 
     void Start()
     {
@@ -67,7 +68,12 @@ public class PlayerScript : MonoBehaviour
                     break;
                     
                     case 1:
-                        attackManager.StartCoroutine("startShears");
+                        attackManager.StartCoroutine("StartShears");
+                        weaponsStarted[i] = true;
+                    break;
+
+                    case 2:
+                        attackManager.StartCoroutine("StartAxes");
                         weaponsStarted[i] = true;
                     break;
                 }
