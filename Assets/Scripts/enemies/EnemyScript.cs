@@ -9,7 +9,8 @@ public class EnemyScript : MonoBehaviour
     private GameObject player;
     public float moveSpeed = 0.1f;
     public float health = 10;
-    public float damage = 1;
+    public float damage = 20;
+    public float downTime = 0;
 
 
     private void Awake()
@@ -18,6 +19,10 @@ public class EnemyScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (downTime > 0)
+        { 
+            downTime -= Time.deltaTime; 
+        }
         enemyTransform.position = Vector3.MoveTowards(enemyTransform.position,player.transform.position,moveSpeed);
         if (health <= 0)
         {

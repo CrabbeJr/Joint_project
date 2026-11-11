@@ -1,13 +1,36 @@
+using System;
+using System.Runtime.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Transform transformPlayer;
-    public float moveSpeed = 0.01f;
-    public float health = 50;
+    public Transform transformPlayer; 
+    [Serializable] public class playerStats
+    {
+        public float health = 50;
+        public float moveSpeed = 0.05f;
+        public float weaponCooldownMultiplier = 1f;
+        public float weaponAreaMultiplier = 1f;
+        public float moveSpeedMultiplier = 1f;
+        public float weaponSpeedMultiplier = 1f;
+        public float weaponDamageMultiplier = 1f;
+        public float weaponDurationMultiplier = 1f;
+        public float playerRegen = 0f;
+        public float playerLuck = 0f;
+        public float playerXpGain = 0f;
+        public float playerPickupRangeMultiplier = 1f;
+        public float weaponAdditionalProjectileCount = 0f;
+        public bool[] weaponsOwned = new bool[4];
+    }
 
-    public bool[] weaponsOwned = { false, false};
+    public int playerCharacter = 0;
+
+    public playerStats[] characterStats;
+    private playerStats currentStats;
+
     private bool[] weaponsStarted = { false, false };
 
     private AttackManager attackManager;
@@ -15,6 +38,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        currentStats = characterStats[playerCharacter];
         attackManager = this.GetComponent<AttackManager>();
     }
 
@@ -26,16 +50,14 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-       // player movement
-       // float moveSpeedReal = moveSpeed * Time.deltaTime;
-        transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeed, Input.GetAxis("Vertical") * moveSpeed, 0);
+        float moveSpeedReal = currentStats.moveSpeed * currentStats.moveSpeedMultiplier;
+        transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeedReal, Input.GetAxis("Vertical") * moveSpeedReal, 0);
         
         
         //weapon management
-        for (int i = 0; i < weaponsOwned.GetLength(0); i++)
+        for (int i = 0; i < currentStats.weaponsOwned.GetLength(0); i++)
         {
-            if (weaponsOwned[i] && !weaponsStarted[i])
+            if (currentStats.weaponsOwned[i] && !weaponsStarted[i])
             {
                 switch (i)
                 {
@@ -50,6 +72,26 @@ public class PlayerScript : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
+            if (enemy.downTime <= 0)
+            {
+                enemy.downTime = 0.2f;
+                takeDamage(enemy.damage);
+            }
+        }
+    }
+    private void takeDamage(float damage)
+    {
+        currentStats.health -= damage;
+        if (currentStats.health <= 0)
+        {
+            Debug.Log("DED");
         }
     }
 }

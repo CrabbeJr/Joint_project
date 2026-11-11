@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7192795631231094376}
   - component: {fileID: 3502973239598724332}
   - component: {fileID: 326857366569080935}
+  - component: {fileID: -5314590460433054467}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -109,9 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   transformPlayer: {fileID: 7332008180616627092}
-  moveSpeed: 0.05
-  health: 50
-  weaponsOwned: 0000
+  playerCharacter: 0
+  characterStats: []
 --- !u!114 &-7192795631231094376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackManager
   strimmerAttack: {fileID: 7189959878058155716, guid: dd9d49daa356251469f9fa05d0b5569b, type: 3}
   strimmerObject: {fileID: 7189959878058155716, guid: d9033f8bcafa9ca47bc9076d6246d769, type: 3}
+  shearObject: {fileID: 0}
   strimmerCooldown: 0.5
+  shearCooldown: 1
 --- !u!50 &3502973239598724332
 Rigidbody2D:
   serializedVersion: 5
@@ -190,3 +192,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.11
+--- !u!114 &-5314590460433054467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471820875860802917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22fe100f4c5df3949ab773ac91e91ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::tilesetScript
+  tile: {fileID: 0}

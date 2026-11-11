@@ -35,7 +35,6 @@ namespace strimmer.follow
             if (collision.gameObject.CompareTag("Enemy"))
             {          
                 collision.gameObject.GetComponent<EnemyScript>().health -= damage;
-                Debug.Log(collision.gameObject.GetComponent<EnemyScript>().health);
             }
         }
     }
