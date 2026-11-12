@@ -12,9 +12,9 @@ public class PlayerScript : MonoBehaviour
     {
         public float health = 50;
         public float moveSpeed = 0.05f;
+        public float moveSpeedMultiplier = 1f;
         public float weaponCooldown = 1f;
         public float weaponArea = 1f;
-        public float moveSpeedMultiplier = 1f;
         public float weaponSpeed = 1f;
         public float weaponDamage = 1f;
         public float weaponDuration = 1f;
@@ -31,30 +31,34 @@ public class PlayerScript : MonoBehaviour
     public playerStats[] characterStats;
     public playerStats currentStats;
 
-    public bool[] weaponsOwned = { false, false, false};
     private bool[] weaponsStarted = { false, false , false};
 
     private AttackManager attackManager;
 
+    //variables for player movement
+    public Vector3 velocity, pastPos;
+
 
     void Start()
     {
+        pastPos = new Vector3(0, 0, 0);
         currentStats = characterStats[playerCharacter];
         attackManager = this.GetComponent<AttackManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-       
+
     }
 
     private void FixedUpdate()
     {
         float moveSpeedReal = currentStats.moveSpeed * currentStats.moveSpeedMultiplier;
         transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeedReal, Input.GetAxis("Vertical") * moveSpeedReal, 0);
-        
-        
+
+        velocity = (transformPlayer.position - pastPos) / Time.deltaTime;
+        pastPos = transformPlayer.position;
+
         //weapon management
         for (int i = 0; i < currentStats.weaponsOwned.GetLength(0); i++)
         {
