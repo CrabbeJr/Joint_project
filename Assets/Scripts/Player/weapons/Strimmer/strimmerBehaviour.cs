@@ -37,5 +37,6 @@ namespace strimmer.follow
                 collision.gameObject.GetComponent<EnemyScript>().health -= damage;
             }
         }
+
     }
 }
