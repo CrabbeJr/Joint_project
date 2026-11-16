@@ -111,7 +111,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   transformPlayer: {fileID: 7332008180616627092}
   playerCharacter: 0
-  characterStats: []
+  characterStats:
+  - health: 50
+    moveSpeed: 0.05
+    moveSpeedMultiplier: 1
+    weaponCooldown: 1.3
+    weaponArea: 1
+    weaponSpeed: 1
+    weaponDamage: 1
+    weaponDuration: 1
+    playerRegen: 0
+    playerLuck: 0
+    playerXpGain: 1
+    playerPickupRangeMultiplier: 1
+    weaponAdditionalProjectileCount: 0
+    weaponsOwned: 01000000
+  currentStats:
+    health: 50
+    moveSpeed: 0.05
+    moveSpeedMultiplier: 1
+    weaponCooldown: 1
+    weaponArea: 1
+    weaponSpeed: 1
+    weaponDamage: 1
+    weaponDuration: 1
+    playerRegen: 0
+    playerLuck: 0
+    playerXpGain: 0
+    playerPickupRangeMultiplier: 1
+    weaponAdditionalProjectileCount: 0
+    weaponsOwned: 00000100
+  velocity: {x: 0, y: 0, z: 0}
+  pastPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-7192795631231094376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +161,7 @@ MonoBehaviour:
   axeObject: {fileID: 869635819019097193, guid: 185254aeaca8b5b45bfab69153b8358e, type: 3}
   strimmerCooldown: 0.5
   shearCooldown: 1
+  axeCooldown: 2
 --- !u!50 &3502973239598724332
 Rigidbody2D:
   serializedVersion: 5
@@ -205,4 +237,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22fe100f4c5df3949ab773ac91e91ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::tilesetScript
+  map: {fileID: 0}
   tile: {fileID: 0}

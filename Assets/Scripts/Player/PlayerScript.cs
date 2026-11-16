@@ -17,12 +17,12 @@ public class PlayerScript : MonoBehaviour
     {
         public float health = 50;
         public float moveSpeed = 0.05f;
-        public float weaponCooldownMultiplier = 1f;
-        public float weaponAreaMultiplier = 1f;
         public float moveSpeedMultiplier = 1f;
-        public float weaponSpeedMultiplier = 1f;
-        public float weaponDamageMultiplier = 1f;
-        public float weaponDurationMultiplier = 1f;
+        public float weaponCooldown = 1f;
+        public float weaponArea = 1f;
+        public float weaponSpeed = 1f;
+        public float weaponDamage = 1f;
+        public float weaponDuration = 1f;
         public float playerRegen = 0f;
         public float playerLuck = 0f;
         public float playerXpGain = 0f;
@@ -42,9 +42,13 @@ public class PlayerScript : MonoBehaviour
 
     private AttackManager attackManager;
 
+    //variables for player movement
+    public Vector3 velocity, pastPos;
+
 
     void Start()
     {
+        pastPos = new Vector3(0, 0, 0);
         currentStats = characterStats[playerCharacter];
         attackManager = this.GetComponent<AttackManager>();
     }
@@ -58,8 +62,10 @@ public class PlayerScript : MonoBehaviour
     {
         float moveSpeedReal = currentStats.moveSpeed * currentStats.moveSpeedMultiplier;
         transformPlayer.position += new Vector3(Input.GetAxis("Horizontal") * moveSpeedReal, Input.GetAxis("Vertical") * moveSpeedReal, 0);
-        
-        
+
+        velocity = (transformPlayer.position - pastPos) / Time.deltaTime;
+        pastPos = transformPlayer.position;
+
         //weapon management
         for (int i = 0; i < currentStats.weaponsOwned.GetLength(0); i++)
         {

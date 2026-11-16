@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1839735485 &44468628 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 2914825362080505636, guid: cb7e2636c4865b24aab971598ad5c1db, type: 3}
+  m_PrefabInstance: {fileID: 791246824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &309484916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7332008180616627092, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
@@ -2424,7 +2429,7 @@ Transform:
   m_GameObject: {fileID: 1998701018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.762, y: -1.042, z: 0}
+  m_LocalPosition: {x: 0.02, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

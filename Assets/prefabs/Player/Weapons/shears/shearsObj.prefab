@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2650690724018684927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.44, y: 0.22, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817f5f29f5a25154687117141ce62ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  initialForce: 149.7
-  backAcceleration: 2
-  damage: 5
+  player: {fileID: 7471820875860802917, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
+  initialForce: 80
+  backAcceleration: 1
 --- !u!60 &6241782099521746652
 PolygonCollider2D:
   m_ObjectHideFlags: 0

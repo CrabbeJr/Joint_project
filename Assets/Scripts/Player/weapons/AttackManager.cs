@@ -1,9 +1,10 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using static PlayerScript;
 
 public class AttackManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //setting up attack refrences
     private GameObject spawnedStrimmerAttack = null;
     public GameObject strimmerAttack;
     public GameObject strimmerObject;
@@ -11,9 +12,21 @@ public class AttackManager : MonoBehaviour
     public GameObject axeObject;
     private PlayerScript playerStats;
 
-    //cooldowns - could mabye be turned into one variable later and have each weapon have their cooldown dictated by some function of value
+    //setting up player stats
+    PlayerScript playerScr;
+    PlayerScript.playerStats stats;
+    int currentCharacter;
+
     public float strimmerCooldown = 0.5f;
     public float shearCooldown = 1f;
+    public float axeCooldown = 2f;
+
+    private void Start()
+    {
+        playerScr = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
+        currentCharacter = playerScr.playerCharacter;
+        stats = playerScr.characterStats[currentCharacter];
+    }
 
     private float timeBetweenSpawns = 0.1f;
 
@@ -38,7 +51,7 @@ public class AttackManager : MonoBehaviour
     private void StartStrimmer()
     {
         Instantiate(strimmerObject, transform.position, Quaternion.identity);
-        InvokeRepeating(nameof(spawnAttackStrimmer), 0, strimmerCooldown);
+        InvokeRepeating(nameof(spawnAttackStrimmer), 0, strimmerCooldown / stats.weaponCooldown);
     }
 
     private void spawnAttackStrimmer()
