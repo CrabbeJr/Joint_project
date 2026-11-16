@@ -9,20 +9,26 @@ public class AttackManager : MonoBehaviour
     public GameObject strimmerObject;
     public GameObject shearObject;
     public GameObject axeObject;
+    private PlayerScript playerStats;
 
     //cooldowns - could mabye be turned into one variable later and have each weapon have their cooldown dictated by some function of value
     public float strimmerCooldown = 0.5f;
     public float shearCooldown = 1f;
 
+    private float timeBetweenSpawns = 0.1f;
+
+    private void Awake()
+    {
+        playerStats = gameObject.GetComponent<PlayerScript>();
+        timeBetweenSpawns = 0.1f;
+    }
 
     public bool NotOnScreen(GameObject gameObj)
     {
         //taken from https://discussions.unity.com/t/detecting-if-a-visual-element-is-off-screen/880405
 
         var pos = Camera.main.WorldToScreenPoint(gameObj.transform.position);
-        bool isOffscreen = pos.x <= 0 || pos.x >= Screen.width ||
-                           pos.y <= 0 || pos.y >= Screen.height;
-
+        bool isOffscreen = pos.x <= 0 || pos.x >= Screen.width || pos.y <= 0 || pos.y >= Screen.height;
 
         return isOffscreen;
     }
@@ -41,26 +47,50 @@ public class AttackManager : MonoBehaviour
     }
 
     //function to throw shear
-    private void throwShear()
+    private IEnumerator throwShear()
     {
-        Instantiate(shearObject, transform.position, Quaternion.identity);
+        while(true)
+        {
+            Debug.Log("RAH?");
+            for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[1].additionalProjectiles; i++)
+            {
+                if (GameObject.FindGameObjectWithTag("Enemy") != null)
+                {
+                    Instantiate(shearObject, transform.position, Quaternion.identity);
+                    yield return new WaitForSeconds(timeBetweenSpawns);
+                }
+            }
+            yield return new WaitForSeconds(shearCooldown);
+        }
     }
 
     //function to throw shears repeatedly
     private void StartShears()
     {
-        InvokeRepeating(nameof(throwShear), 0, shearCooldown);
+        StartCoroutine("throwShear");
     }
 
 
-    private void throwAxe()
+    private IEnumerator throwAxe()
     {
-        Instantiate(axeObject, transform.position, Quaternion.identity);
+        while (true)
+        {
+            Debug.Log("RAH?");
+            for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[1].additionalProjectiles; i++)
+            {
+                if (GameObject.FindGameObjectWithTag("Enemy") != null)
+                {
+                    Instantiate(axeObject, transform.position, Quaternion.identity);
+                    yield return new WaitForSeconds(timeBetweenSpawns);
+                }
+            }
+            yield return new WaitForSeconds(strimmerCooldown);
+        }
     }
 
     //function to throw axes repeatedly
     private void StartAxes()
     {
-        InvokeRepeating(nameof(throwAxe), 0, shearCooldown);
+        StartCoroutine("throwAxe");
     }
 }

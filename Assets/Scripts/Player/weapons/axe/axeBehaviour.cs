@@ -6,7 +6,7 @@ public class axeBehaviour : MonoBehaviour
     private GameObject gameObj;
     private Rigidbody2D rb;
     private Vector2 aim;
-    public float damage = 10;
+    public float damage = 5;
     public float throwForce = 200;
     public float gravity = 5;
 
