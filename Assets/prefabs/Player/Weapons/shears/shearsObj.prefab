@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817f5f29f5a25154687117141ce62ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 7471820875860802917, guid: 2ce444611ee47c249a6c1b86b60a8694, type: 3}
   initialForce: 80
   backAcceleration: 1
+  damage: 5
 --- !u!60 &6241782099521746652
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.Collections;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private string[] rewardsStored;
+    private GameObject buttons;
     public Transform transformPlayer;
     [Serializable] public class weaponStats
     {
@@ -48,6 +53,8 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        buttons = GameObject.FindGameObjectWithTag("UI");
+        buttons.gameObject.SetActive(false);
         pastPos = new Vector3(0, 0, 0);
         currentStats = characterStats[playerCharacter];
         attackManager = this.GetComponent<AttackManager>();
@@ -57,6 +64,51 @@ public class PlayerScript : MonoBehaviour
     int xpNeeded(int level)
     {
         return Math.Pow((level * 50),1.05).ConvertTo<int>();
+    }
+    List<string> selectPotentialRewards()
+    {
+        List<string> potentialRewards = new List<string>();
+        string[] regularRewards =
+        {
+            "all damage",
+            "all speed (weapon)",
+            "all projectiles"
+        };
+        for (int i = 0; i < weaponsStarted.Length; i++)
+        {
+            if (!currentStats.weaponsOwned[i])
+            {
+                switch (i)
+                {
+                    case 0:
+                        potentialRewards.Add("strimmer");
+                        break;
+                    case 1:
+                        potentialRewards.Add("shear");
+                        break;
+                    case 2:
+                        potentialRewards.Add("axe");
+                        break;
+                }
+            }
+            else
+            {
+                switch (i)
+                {
+                    case 1:
+                        potentialRewards.Add("shear Projectiles");
+                        break;
+                    case 2:
+                        potentialRewards.Add("axe Projectiles");
+                        break;
+                }
+            }
+        }
+        for (int i = 0; i < regularRewards.Length; i++)
+        {
+            potentialRewards.Add(regularRewards[i]);
+        }
+        return potentialRewards;
     }
     private void FixedUpdate()
     {
@@ -108,14 +160,8 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Xp")
         {
             currentStats.xp += 30 * currentStats.playerXpGain;
-            Destroy(collision.gameObject);
-            Debug.Log(currentStats.xp);
-            if (currentStats.xp > xpNeeded(currentStats.level))
-            {
-                currentStats.xp -= xpNeeded(currentStats.level);
-                currentStats.level++;
-                Debug.Log(currentStats.level);
-            }
+            levelUp();
+            Destroy(collision.gameObject);   
         }
     }
     private void takeDamage(float damage)
@@ -124,6 +170,78 @@ public class PlayerScript : MonoBehaviour
         if (currentStats.health <= 0)
         {
             Debug.Log("DED");
+        }
+    }
+    private void levelUp()
+    {
+        if (currentStats.xp > xpNeeded(currentStats.level))
+        {
+
+            Time.timeScale = 0.0f;
+
+            currentStats.xp -= xpNeeded(currentStats.level);
+            currentStats.level++;
+            List<string> rewards = selectPotentialRewards();
+            buttons.gameObject.SetActive(true);
+            GameObject button1 = buttons.transform.GetChild(0).gameObject;
+            GameObject button2 = buttons.transform.GetChild(1).gameObject;
+            GameObject button3 = buttons.transform.GetChild(2).gameObject;
+
+            bool randomNumsFound = false;
+            int[] randomNums = { -1, -1, -1 };
+
+            while (!randomNumsFound)
+            {
+                randomNums[0] = UnityEngine.Random.Range(0,rewards.Count);
+                randomNums[1] = UnityEngine.Random.Range(0, rewards.Count);
+                randomNums[2] = UnityEngine.Random.Range(0, rewards.Count);
+                if (allUnique3(randomNums) || rewards.Count < 3)
+                {
+                    randomNumsFound = true;
+                }
+            }
+
+            rewardsStored = new string[] { rewards[randomNums[0]], rewards[randomNums[1]], rewards[randomNums[2]] };
+
+            button1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = rewardsStored[0];
+            button2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = rewardsStored[1];
+            button3.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = rewardsStored[2];
+        }
+    }
+    private bool allUnique3(int[] nums)
+    { 
+        return nums[0] != nums[1] && nums[0] != nums[2] && nums[1] != nums[2];
+    }
+
+    public void rewardTaken(int rewardTakenNum)
+    {
+        Debug.Log("AAAA");
+        switch (rewardsStored[rewardTakenNum])
+        {
+            case "all damage":
+                currentStats.weaponDamage += 0.05f;
+                break;
+            case "all speed (weapon)":
+                currentStats.weaponSpeed += 0.05f;
+                break;
+            case "all projectiles":
+                currentStats.weaponAdditionalProjectileCount++;
+                break;
+            case "shear":
+                currentStats.weaponsOwned[1] = true;
+                break;
+            case "strimmer":
+                currentStats.weaponsOwned[0] = true;
+                break;
+            case "axe":
+                currentStats.weaponsOwned[2] = true;
+                break;
+            case "axe Projectiles":
+                weaponStat[2].additionalProjectiles++;
+                break;
+            case "shear Projectiles":
+                weaponStat[1].additionalProjectiles++;
+                break;
         }
     }
 }

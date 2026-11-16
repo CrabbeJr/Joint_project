@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public Transform enemyTransform;
     private GameObject player;
     public float moveSpeed = 0.1f;
-    public float health = 10;
+    public float health = 100;
     public float damage = 20;
     public float downTime = 0;
     public GameObject xpObject;

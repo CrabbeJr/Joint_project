@@ -64,7 +64,6 @@ public class AttackManager : MonoBehaviour
     {
         while(true)
         {
-            Debug.Log("RAH?");
             for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[1].additionalProjectiles; i++)
             {
                 if (GameObject.FindGameObjectWithTag("Enemy") != null)
@@ -88,7 +87,6 @@ public class AttackManager : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("RAH?");
             for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[1].additionalProjectiles; i++)
             {
                 if (GameObject.FindGameObjectWithTag("Enemy") != null)

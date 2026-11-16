@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScript
   enemyTransform: {fileID: 3379544042113791576}
   moveSpeed: 0.03
-  health: 10
+  health: 20
   damage: 1
   downTime: 0
   xpObject: {fileID: 4120607908888436045, guid: 229dc73ac9f70d146b86a5200b77304f, type: 3}

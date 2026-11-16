@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerScript;
 
@@ -19,8 +20,7 @@ public class ShearBehaviour : MonoBehaviour
     private Vector2 backAim; //aim for going backwards
     public float initialForce = 5f;
     public float backAcceleration = 1f;
-    public int damage = 5;
-    private AttackManager AM;
+    public float damage = 5;
     
 
     //function to find nearest enemy. found on https://discussions.unity.com/t/clean-est-way-to-find-nearest-object-of-many-c/409917/2
@@ -43,7 +43,7 @@ public class ShearBehaviour : MonoBehaviour
         return tMin;
     }
 
-private void Awake()
+    private void Awake()
     {
         AM = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackManager>();
         playerScr = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
@@ -81,11 +81,13 @@ private void Awake()
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyScript>().health -= damage;
         }
     }
+
 }
