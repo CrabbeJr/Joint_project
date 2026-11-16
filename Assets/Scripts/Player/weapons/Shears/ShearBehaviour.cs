@@ -19,8 +19,8 @@ public class ShearBehaviour : MonoBehaviour
     private Vector2 backAim; //aim for going backwards
     public float initialForce = 5f;
     public float backAcceleration = 1f;
-
-    public float damage = 5;
+    public int damage = 5;
+    private AttackManager AM;
     
 
     //function to find nearest enemy. found on https://discussions.unity.com/t/clean-est-way-to-find-nearest-object-of-many-c/409917/2
@@ -52,6 +52,9 @@ private void Awake()
         stats = playerScr.characterStats[currentCharacter];
         rb = GetComponent<Rigidbody2D>();
 
+        AM = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackManager>();
+        
+        rb = this.GetComponent<Rigidbody2D>();
         damage *= stats.weaponDamage;
 
 
@@ -71,9 +74,8 @@ private void Awake()
 
     private void FixedUpdate()
     {
-        rb.AddForce(backAim * backAcceleration * stats.weaponSpeed);
-
-        if (AM.NotOnScreen(this.gameObject))
+        rb.AddForce(backAim * backAcceleration);
+        if (AM.NotOnScreen(gameObject))
         {
             Destroy(this.gameObject);
         }

@@ -1,13 +1,18 @@
 using System;
 using System.Runtime.CompilerServices;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Transform transformPlayer; 
+    public Transform transformPlayer;
+    [Serializable] public class weaponStats
+    {
+        public int additionalProjectiles = 0; 
+    };
     [Serializable] public class playerStats
     {
         public float health = 50;
@@ -24,13 +29,15 @@ public class PlayerScript : MonoBehaviour
         public float playerPickupRangeMultiplier = 1f;
         public float weaponAdditionalProjectileCount = 0f;
         public bool[] weaponsOwned = new bool[4];
+        public int level;
+        public float xp;
     }
 
     public int playerCharacter = 0;
 
     public playerStats[] characterStats;
     public playerStats currentStats;
-
+    public weaponStats[] weaponStat;
     private bool[] weaponsStarted = { false, false , false};
 
     private AttackManager attackManager;
@@ -46,11 +53,11 @@ public class PlayerScript : MonoBehaviour
         attackManager = this.GetComponent<AttackManager>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    int xpNeeded(int level)
     {
-
+        return Math.Pow((level * 50),1.05).ConvertTo<int>();
     }
-
     private void FixedUpdate()
     {
         float moveSpeedReal = currentStats.moveSpeed * currentStats.moveSpeedMultiplier;
@@ -93,6 +100,21 @@ public class PlayerScript : MonoBehaviour
             {
                 enemy.downTime = 0.2f;
                 takeDamage(enemy.damage);
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Xp")
+        {
+            currentStats.xp += 30 * currentStats.playerXpGain;
+            Destroy(collision.gameObject);
+            Debug.Log(currentStats.xp);
+            if (currentStats.xp > xpNeeded(currentStats.level))
+            {
+                currentStats.xp -= xpNeeded(currentStats.level);
+                currentStats.level++;
+                Debug.Log(currentStats.level);
             }
         }
     }

@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public float health = 10;
     public float damage = 20;
     public float downTime = 0;
+    public GameObject xpObject;
 
 
     private void Awake()
@@ -26,6 +27,7 @@ public class EnemyScript : MonoBehaviour
         enemyTransform.position = Vector3.MoveTowards(enemyTransform.position,player.transform.position,moveSpeed);
         if (health <= 0)
         {
+            Instantiate(xpObject, transform.position, new Quaternion (0,0,90,90));
             Destroy(this.gameObject);
         }
     }
