@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -169,6 +170,7 @@ public class PlayerScript : MonoBehaviour
         currentStats.health -= damage;
         if (currentStats.health <= 0)
         {
+            SceneManager.LoadScene("Level 1 Scene");
             Debug.Log("DED");
         }
     }
