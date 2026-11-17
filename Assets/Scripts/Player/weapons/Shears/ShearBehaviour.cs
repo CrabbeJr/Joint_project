@@ -68,7 +68,7 @@ public class ShearBehaviour : MonoBehaviour
             randAim = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
             aim = Vector2.Normalize(randAim);
         }
-        backAim = (-1) * aim;
+        backAim = Vector2.Normalize( (-1) * aim);
         rb.AddForce(((aim * initialForce) + (new Vector2(playerScr.velocity.x, playerScr.velocity.y) * (initialForce/2))) * stats.weaponSpeed);
     }
 
