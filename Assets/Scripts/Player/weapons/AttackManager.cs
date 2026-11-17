@@ -87,7 +87,7 @@ public class AttackManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[1].additionalProjectiles; i++)
+            for (int i = 0; i <= playerStats.currentStats.weaponAdditionalProjectileCount + playerStats.weaponStat[2].additionalProjectiles; i++)
             {
                 if (GameObject.FindGameObjectWithTag("Enemy") != null)
                 {
